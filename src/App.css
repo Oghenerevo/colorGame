@@ -70,7 +70,6 @@ h1 span {
 }
 
 .game-board {
-  /* border: solid blue; */
   margin-block-start: 50px;
   position: fixed;
   top: 50%;
@@ -127,7 +126,7 @@ h1 span {
 }
 
 .three {
-  background: #B8860B;
+  background: red;
 }
 
 .four {
@@ -185,7 +184,7 @@ footer {
 
 @media screen and (max-width: 402px) {
   .game-board {
-    margin-block-start: 100px;
+    margin-block-start: 80px;
   }
 
   .options {
