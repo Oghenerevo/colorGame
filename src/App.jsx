@@ -143,16 +143,14 @@ function App() {
               </div>
             </>
           )}
+          {message && <div className="message">{message}</div>}
         </section>
       </section>
-
-      {message && <div className="message">{message}</div>}
 
       {/* <footer>
         <p>&copy; 2025 Revo. All rights reserved.</p>
       </footer> */}
 
-      {/* Help Modal */}
       {isHelpModalOpen && (
         <div className="modal-overlay" onClick={() => setIsHelpModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

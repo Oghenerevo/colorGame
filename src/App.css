@@ -99,6 +99,7 @@ h1 span {
 
 .game-board {
   margin-block-start: 50px;
+  /* border: solid green; */
 }
 
 .target-color {
@@ -110,7 +111,7 @@ h1 span {
 }
 
 .options {
-  margin: 80px auto;
+  margin: 80px auto 20px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
@@ -164,7 +165,7 @@ h1 span {
 .message {
   font-size: 20px;
   text-align: center;
-  margin-block-start: 15px;
+  /* margin-block-start: 15px; */
   font-weight: bold;
   color: black;
 }
