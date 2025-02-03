@@ -98,6 +98,11 @@ h1 span {
 
 .game-board {
   margin-block-start: 30px;
+  color: #111;
+}
+
+.game-board h3 {
+  text-align: center;
 }
 
 .target-color {
@@ -109,7 +114,7 @@ h1 span {
 }
 
 .options {
-  margin: 80px auto 20px;
+  margin: 30px auto 20px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
@@ -142,11 +147,11 @@ h1 span {
 }
 
 .option-color.selected.correct {
-  border: 3px solid green;
+  border: 5px solid green;
 }
 
 .option-color.selected.wrong {
-  border: 3px solid red;
+  border: 5px solid red;
 }
 
 .check-icon {
@@ -173,11 +178,11 @@ h1 span {
   color: black;
 }
 
-footer {
+/* footer {
   width: 100%;
   text-align: center;
   color: #222;
-}
+} */
 
 @media screen and (max-width: 600px) {
   .sm-score {
@@ -259,15 +264,60 @@ footer {
 }
 
 .modal-btn {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .close-btn {
   margin-top: 15px;
-  padding: 8px 12px;
+  padding: 10px 20px;
   background: red;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.restart-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.loader-spin {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top: 6px solid #FF5733;
+  border-right: 6px solid #FFC300;
+  border-bottom: 6px solid #33FF57;
+  border-left: 6px solid #3380FF;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    border-top-color: #FF33F6;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-right-color: #FF5733;
+  }
+  75% {
+    border-bottom-color: #FFC300;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-left-color: #33FF57;
+  }
 }

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Check, Menu, X, XCircle, Loader } from "lucide-react"; 
+import { Check, Menu, X } from "lucide-react"; 
 import './App.css'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
+  const [isRestartModalOpen, setIsRestartModalOpen] = useState(false);
   const [targetColor, setTargetColor] = useState("");
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
@@ -12,30 +13,14 @@ function App() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [round, setRound] = useState(0);
+  const [isScoreModalOpen, setIsScoreModalOpen] = useState(false);
 
   const getRandomColor = () => {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     return `rgb(${r}, ${g}, ${b})`;
-  };
-
-  const generateColorShades = (baseColor) => {
-    let shades = [];
-
-    const rgbValues = baseColor.match(/\d+/g); // Extract RGB values
-    if (!rgbValues) return [];
-
-    const [r, g, b] = rgbValues.map(Number);
-
-    for (let i = 0; i < 5; i++) {
-      const newR = Math.min(255, Math.max(0, r + Math.floor(Math.random() * 50 - 25)));
-      const newG = Math.min(255, Math.max(0, g + Math.floor(Math.random() * 50 - 25)));
-      const newB = Math.min(255, Math.max(0, b + Math.floor(Math.random() * 50 - 25)));
-      shades.push(`rgb(${newR}, ${newG}, ${newB})`);
-    }
-
-    return shades;
   };
 
   const shuffleArray = (array) => {
@@ -47,39 +32,60 @@ function App() {
     const correct = color === targetColor;
 
     setIsCorrect(correct);
-    setMessage(correct ? "✅ Correct! 🎉" : "❌ Wrong! Try again.");
+    setMessage(correct ? "Perfect match!" : "Oops, color mismatch");
 
     if (correct) {
       setScore((prev) => prev + 1);
     }
 
-    setTimeout(generateNewRound, 1500);
-  };
+    setTimeout(generateNewRound, 500);
+  };  
 
   const generateNewRound = (resetScore = false) => {
+    if (round === 5) {
+      setIsScoreModalOpen(true);
+      return;
+    }
+  
     setLoading(true);
     setMessage("");
-
+    setIsRestartModalOpen(false);
+  
     setTimeout(() => {
       const newTargetColor = getRandomColor();
-      const colorShades = generateColorShades(newTargetColor);
-      const newOptions = shuffleArray([...colorShades, newTargetColor]);
-
+      let randomColors = new Set();
+  
+      while (randomColors.size < 5) {
+        let newColor = getRandomColor();
+        if (newColor !== newTargetColor) {
+          randomColors.add(newColor);
+        }
+      }
+  
+      const newOptions = shuffleArray([newTargetColor, ...randomColors]);
+  
       setTargetColor(newTargetColor);
       setOptions(newOptions);
       setSelectedColor(null);
       setLoading(false);
-
+      setRound((prev) => (resetScore ? 1 : prev + 1));
+  
       if (resetScore) {
         setScore(0);
       }
-    }, 1000);
-  };
+    }, 500);
+  };  
 
+  // useEffect(() => {
+  //   generateNewRound();
+  // }, []);
 
   useEffect(() => {
-    generateNewRound();
-  }, []);
+    if (round === 0 && score === 0 && !isScoreModalOpen) {
+      generateNewRound(true);
+    }
+  }, [round, score, isScoreModalOpen]);
+
 
   return (
     <section className="container">
@@ -108,7 +114,7 @@ function App() {
 
         <div className={`header-btns ${menuOpen ? "open" : ""}`}>
           <button onClick={() => setIsHelpModalOpen(true)}>Help</button>
-          <button onClick={() => generateNewRound(true)} data-testid="nextGameButton">Restart</button>
+          <button onClick={() => setIsRestartModalOpen(true)} data-testid="nextGameButton">Restart</button>
         </div>
       </header>
 
@@ -121,22 +127,23 @@ function App() {
         <section className="game-board">
           {loading ? (
             <div className="loader">
-              <Loader size={50} className="spinner" />
+              <div className="loader-spin"></div>
             </div>
           ) : (
             <>
               <div className="target-color" style={{ backgroundColor: targetColor }} data-testid="colorBox"></div>
-
-              <div className="options" data-testid="colorOption">
+              <h3 data-testid="gameInstructions">Color Match: Choose the color that matches the one above.</h3>
+              <div className="options">
                 {options.map((color, index) => (
                   <div 
                     key={index} 
                     className={`option-color ${selectedColor === color ? (isCorrect ? "selected correct" : "selected wrong") : ""}`} 
                     style={{ backgroundColor: color }}
                     onClick={() => handleColorPick(color)}
+                    data-testid="colorOption"
                   >
                     {selectedColor === color && (
-                      isCorrect ? <Check size={24} className="check-icon" /> : <XCircle size={24} className="cross-icon" />
+                      isCorrect ? <Check size={24} className="check-icon" /> : <X size={24} className="cross-icon" />
                     )}
                   </div>
                 ))}
@@ -153,7 +160,7 @@ function App() {
 
       {isHelpModalOpen && (
         <div className="modal-overlay" onClick={() => setIsHelpModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()} data-testid="gameInstructions">
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>How to Play</h2>
             <ul>
               <li>
@@ -172,8 +179,45 @@ function App() {
           </div>
         </div>
       )}
+
+      {isRestartModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsRestartModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Restart</h2>
+            <p>You&apos;ll loose your score if you restart, Do you want to restart?</p>
+            <div className="modal-btn">
+              <button className="restart-btn" onClick={() => generateNewRound(true)}>Restart</button>
+              <button className="close-btn" onClick={() => setIsRestartModalOpen(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isScoreModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsScoreModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Game Over!</h2>
+            <p>
+              {score === 5 ? "Amazing! You got a perfect score!" :
+              score >= 3 ? `Great job color genuis! You scored ${score}/5!` :
+              score > 0 ? `You scored ${score}/5. Keep practicing!` :
+              "Oops! You didn't get any right. Try again!"}
+            </p>
+            <div className="modal-btn">
+              <button className="restart-btn" onClick={() => {
+                setIsScoreModalOpen(false);
+                setRound(0);
+                setScore(0);
+                // setTimeout(() => generateNewRound(true), 100);
+              }}>
+                Play Again
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
-
+// 
 export default App
