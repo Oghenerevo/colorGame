@@ -113,8 +113,22 @@ function App() {
         </button>
 
         <div className={`header-btns ${menuOpen ? "open" : ""}`}>
-          <button onClick={() => setIsHelpModalOpen(true)}>Help</button>
-          <button onClick={() => setIsRestartModalOpen(true)} data-testid="nextGameButton">Restart</button>
+          <button 
+            onClick={() => {
+              setIsHelpModalOpen(true);
+              setMenuOpen(false);
+            }}>
+              Help
+            </button>
+          <button 
+            onClick={() => {
+              setIsRestartModalOpen(true)
+              setMenuOpen(false);
+            }}
+            data-testid="nextGameButton"
+          >
+            Restart
+          </button>
         </div>
       </header>
 

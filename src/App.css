@@ -97,14 +97,13 @@ h1 span {
 }
 
 .game-board {
-  margin-block-start: 10px;
+  margin-block-start: 80px;
   color: #111;
 }
 
 .game-board h3 {
   text-align: center;
   margin: 10px 10px 0;
-
 }
 
 .target-color {
@@ -119,7 +118,6 @@ h1 span {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
-  /* width: min(100%, 800px); */
   width: fit-content;
 }
 
@@ -208,6 +206,10 @@ h1 span {
 
   .hamburger {
     display: block;
+  }
+
+  .game-board {
+    margin-block-start: 0;
   }
 }
 
