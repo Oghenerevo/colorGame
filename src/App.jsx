@@ -206,7 +206,7 @@ function App() {
             <img 
               src={score >= 4 
                 ? "https://cdn.pixabay.com/animation/2024/11/04/15/55/15-55-26-388_256.gif"
-                : "https://pixabay.com/gifs/teddy-bear-teddy-toy-crying-sad-10283/"
+                : "https://cdn.pixabay.com/animation/2024/01/14/13/01/13-01-57-167_512.gif"
               }  
               alt={score >= 4 ? "Celebration" : "Sad"}
               loading="lazy"
