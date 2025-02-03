@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* transition: all .5s ease-in-out; */
 }
 
 li {
@@ -98,8 +97,7 @@ h1 span {
 }
 
 .game-board {
-  margin-block-start: 50px;
-  /* border: solid green; */
+  margin-block-start: 30px;
 }
 
 .target-color {
@@ -136,14 +134,19 @@ h1 span {
   border: solid transparent;
   border-radius: 10px;
   cursor: pointer;
+  position: relative;
 }
 
 .option-color:hover {
   transform: scale(1.1);
 }
 
-.option-color.selected {
-  border: 3px solid white;
+.option-color.selected.correct {
+  border: 3px solid green;
+}
+
+.option-color.selected.wrong {
+  border: 3px solid red;
 }
 
 .check-icon {
@@ -151,7 +154,7 @@ h1 span {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: green;
 }
 
 .cross-icon {

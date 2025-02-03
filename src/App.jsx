@@ -131,7 +131,7 @@ function App() {
                 {options.map((color, index) => (
                   <div 
                     key={index} 
-                    className={`option-color ${selectedColor === color ? "selected" : ""}`} 
+                    className={`option-color ${selectedColor === color ? (isCorrect ? "selected correct" : "selected wrong") : ""}`} 
                     style={{ backgroundColor: color }}
                     onClick={() => handleColorPick(color)}
                   >
