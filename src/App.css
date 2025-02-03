@@ -321,3 +321,16 @@ h1 span {
     border-left-color: #33FF57;
   }
 }
+
+.result-gif {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+
+.score-remark {
+  text-align: center;
+}

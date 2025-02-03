@@ -194,21 +194,37 @@ function App() {
       )}
 
       {isScoreModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsScoreModalOpen(false)}>
+        <div className="modal-overlay" 
+          onClick={() => {
+            setIsScoreModalOpen(false)
+            setRound(0);
+            setScore(0);
+          }}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>Game Over!</h2>
-            <p>
-              {score === 5 ? "Amazing! You got a perfect score!" :
-              score >= 3 ? `Great job color genuis! You scored ${score}/5!` :
-              score > 0 ? `You scored ${score}/5. Keep practicing!` :
-              "Oops! You didn't get any right. Try again!"}
+            
+            <img 
+              src={score >= 4 
+                ? "https://cdn.pixabay.com/animation/2024/11/04/15/55/15-55-26-388_256.gif"
+                : "https://pixabay.com/gifs/teddy-bear-teddy-toy-crying-sad-10283/"
+              }  
+              alt={score >= 4 ? "Celebration" : "Sad"}
+              loading="lazy"
+              className="result-gif"
+            />
+
+            <p className="score-remark">
+              {score === 5 ? "Spot on color magician!, You got a perfect score!" :
+              score > 3 ? `Great job color genuis!, You scored ${score}/5!` :
+              score === 3 ? `Very close to perfection!, You scored ${score}/5!, You can do much better!` :
+              score > 0 ? `You scored ${score}/5. So close, yet so far, Keep practicing!` :
+              "Oops! You didn't get any right. How often do you take garri? Try again!"}
             </p>
             <div className="modal-btn">
               <button className="restart-btn" onClick={() => {
                 setIsScoreModalOpen(false);
                 setRound(0);
                 setScore(0);
-                // setTimeout(() => generateNewRound(true), 100);
               }}>
                 Play Again
               </button>
