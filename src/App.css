@@ -103,7 +103,8 @@ h1 span {
 
 .game-board h3 {
   text-align: center;
-  margin-block-start: 10px;
+  margin: 10px 10px 0;
+
 }
 
 .target-color {
@@ -218,8 +219,8 @@ h1 span {
 @media screen and (max-width: 440px) {
   .options {
     margin: 30px auto;
-    gap: 10px;
-    width: min(100%, 280px);
+    /* gap: 10px; */
+    width: min(100%, 350px);
   }
 
   .option-color {
