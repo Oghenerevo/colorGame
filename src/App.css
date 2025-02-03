@@ -189,7 +189,7 @@ footer {
   }
 
   .options {
-    margin: 40px auto;
+    margin: 30px auto;
   }
 
   .option-color {
@@ -198,6 +198,7 @@ footer {
   }
 
   .target-color {
+    margin: 0 auto;
     width: 150px;
     height: 150px;
   }
