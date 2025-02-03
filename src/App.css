@@ -80,7 +80,7 @@ h1 span {
   background-color: #f5f5f5;
   color: #000;
   border: 1px solid #000;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .sm-score {
@@ -287,6 +287,11 @@ h1 span {
   border-radius: 5px;
 }
 
+.close-btn:hover {
+  background: rgb(150, 3, 3);
+  transform: scale(1.05);
+}
+
 .restart-btn {
   margin-top: 15px;
   padding: 10px 20px;
@@ -295,6 +300,11 @@ h1 span {
   border: none;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.restart-btn:hover {
+  background: rgb(3, 238, 3);
+  transform: scale(1.05);
 }
 
 .loader-spin {

@@ -97,7 +97,6 @@ function App() {
           <span style={{ color: "#FF33F6" }}>l</span>
           <span style={{ color: "#33FF57" }}>o</span>
           <span style={{ color: "#3380FF" }}>r</span>
-          <span> </span>
           <span style={{ color: "#FF5733" }}>M</span>
           <span style={{ color: "#FFC300" }}>a</span>
           <span style={{ color: "#FF33F6" }}>t</span>
@@ -187,7 +186,7 @@ function App() {
             <h2>How to Play</h2>
             <ul>
               <li>
-                <p>Guess the correct target color from the given options!</p>
+                <p>Match the target color from the given options in 5 attempts!</p>
               </li>
               <li>
                 <p>Every correct guess earn you a point.</p>
