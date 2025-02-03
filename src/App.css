@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all .5s ease-in-out;
 }
 
 li {
@@ -167,11 +168,16 @@ h1 span {
 .message {
   font-size: 20px;
   text-align: center;
-  /* margin-block-start: 15px; */
   font-weight: bold;
-  color: black;
 }
 
+.message.correct {
+  color: green;
+}
+
+.message.wrong {
+  color: red;
+}
 /* footer {
   width: 100%;
   text-align: center;

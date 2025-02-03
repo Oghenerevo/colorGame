@@ -38,12 +38,13 @@ function App() {
       setScore((prev) => prev + 1);
     }
 
-    setTimeout(generateNewRound, 500);
+    setTimeout(generateNewRound, 1000);
   };  
 
   const generateNewRound = (resetScore = false) => {
     if (round === 5) {
       setIsScoreModalOpen(true);
+      setTimeout(() => setIsScoreModalOpen(true), 300);
       return;
     }
   
@@ -164,7 +165,15 @@ function App() {
               </div>
             </>
           )}
-          {message && <div className="message" data-testid="gameStatus">{message}</div>}
+          {message && (
+            <div
+              className="message"
+              data-testid="gameStatus"
+              style={{ color: isCorrect ? "green" : "red" }}
+            >
+              {message}
+            </div>
+          )}
         </section>
       </section>
 
