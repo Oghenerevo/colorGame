@@ -1,7 +1,9 @@
-// import { useState } from 'react'
+import { useState } from "react";
+import { Menu, X } from "lucide-react"; 
 import './App.css'
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <section className="container">
@@ -12,7 +14,17 @@ function App() {
           <h3>Score: <strong>0</strong> </h3>
         </div>
 
-        <div className='header-btns'>
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Menu Items */}
+        <div className={`header-btns ${menuOpen ? "open" : ""}`}>
+          <button>Help</button>
+          <button>Restart</button>
+        </div>
+
+        {/* <div className='header-btns'>
           <div>
             <button>Help</button>
           </div>
@@ -20,9 +32,9 @@ function App() {
           <div>
             <button>Restart</button>
           </div>
-        </div>
+        </div> */}
       </header>
-      
+
       {/* score for small screens */}
       <div className="sm-score">
         <h3>Score: <strong>0</strong> </h3>
