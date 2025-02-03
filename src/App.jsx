@@ -99,7 +99,7 @@ function App() {
         </h1>
 
         <div className="bg-score">
-          <h3>Score: <strong>{score}</strong> </h3>
+          <h3 data-testid="score">Score: <strong>{score}</strong> </h3>
         </div>
 
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
@@ -108,13 +108,13 @@ function App() {
 
         <div className={`header-btns ${menuOpen ? "open" : ""}`}>
           <button onClick={() => setIsHelpModalOpen(true)}>Help</button>
-          <button onClick={() => generateNewRound(true)}>Restart</button>
+          <button onClick={() => generateNewRound(true)} data-testid="nextGameButton">Restart</button>
         </div>
       </header>
 
       {/* score for small screens */}
       <div className="sm-score">
-        <h3>Score: <strong>{score}</strong> </h3>
+        <h3 data-testid="score">Score: <strong>{score}</strong> </h3>
       </div>
 
       <section className="game-container">
@@ -125,9 +125,9 @@ function App() {
             </div>
           ) : (
             <>
-              <div className="target-color" style={{ backgroundColor: targetColor }}></div>
+              <div className="target-color" style={{ backgroundColor: targetColor }} data-testid="colorBox"></div>
 
-              <div className="options">
+              <div className="options" data-testid="colorOption">
                 {options.map((color, index) => (
                   <div 
                     key={index} 
@@ -143,7 +143,7 @@ function App() {
               </div>
             </>
           )}
-          {message && <div className="message">{message}</div>}
+          {message && <div className="message" data-testid="gameStatus">{message}</div>}
         </section>
       </section>
 
@@ -153,7 +153,7 @@ function App() {
 
       {isHelpModalOpen && (
         <div className="modal-overlay" onClick={() => setIsHelpModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()} data-testid="gameInstructions">
             <h2>How to Play</h2>
             <ul>
               <li>
