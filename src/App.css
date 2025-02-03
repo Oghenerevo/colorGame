@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all .5s ease-in-out;
+  /* transition: all .5s ease-in-out; */
 }
 
 li {
@@ -12,6 +12,23 @@ li {
 .container {
   width: 100%;
   color: #f5f5f5;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: black;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 header {
@@ -115,37 +132,41 @@ h1 span {
 .option-color {
   width: 120px;
   height: 120px;
-  border: solid #000;
+  border: solid transparent;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .option-color:hover {
-  border: solid gray;
+  transform: scale(1.1);
 }
 
-.one {
-  background: #FFD700;
+.option-color.selected {
+  border: 3px solid white;
 }
 
-.two {
-  background: #8B7500;
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
-.three {
-  background: red;
+.cross-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
 }
 
-.four {
-  background: #C9A600;
-}
-
-.five {
-  background: gold;
-}
-
-.six {
-  background: #E6C200;
+.message {
+  font-size: 20px;
+  text-align: center;
+  margin-block-start: 15px;
+  font-weight: bold;
+  color: black;
 }
 
 footer {
